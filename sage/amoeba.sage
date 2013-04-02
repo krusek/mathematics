@@ -1,5 +1,6 @@
 # This will simply calculate the real A-discriminant amoeba 
-# from the input A matrix as a list.
+# from the input A matrix as a list. 
+# When A\subset Z^n with |A|=n+3.
 #
 # If you want the real A-discriminant for the support
 #
@@ -11,8 +12,8 @@
 # A = [[6,0,0,0,0,3,1],[0,3,1,6,0,0],[1,1,1,0,0,0]]
 # show(amoeba(A, 1/100), xmin=-10, ymin=-10, xmax=10, ymax=10)
 #
-# The parameters for A are as follows:
-# A -     The support of the family. Each element of A is a row of the support
+# The parameters for the function amoeba are as follows:
+# A     - The support of the family. Each element of A is a row of the support
 #         matrix.
 # angle - The smallest angle to differentiate. The smaller the more accurate the
 #         resulting graph.

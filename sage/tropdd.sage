@@ -1,3 +1,31 @@
+# This is different than the file trop2d.sage in that it calculates discriminant
+# amoebae for general k, whereas trop2d.sage only works for k=3. Furthermore,
+# the amoeba function in trop2d returns a collection of line objects. Here the
+# return value is a collection of Polyhedron objects.
+
+# This will simply calculate the p-adic A-discriminant amoeba 
+# from the input A matrix as a list. 
+# When A\subset Z^n with |A|=n+k. (k can be general)
+#
+# If you want the real A-discriminant for the support
+#
+# A = [ 0 1 2 3 4 ]
+#
+# in the box [-10,10]^3, then you use the command:
+# A = [[0,1,2,3,4]]
+# box = Polyhedron(list(get_verts(10,3)))
+# amoeba(A, 3)
+# show(sum(lambda p: box.intersection(p).show(), a))
+#
+# The parameters for the function amoeba are as follows:
+# A     - The support of the family. Each element of A is a row of the support
+#         matrix.
+# angle - The smallest angle to differentiate. The smaller the more accurate the
+#         resulting graph.
+#
+# output : It returns a collection of Polyhedron objects that define the p-adic
+#          discriminant amoeba.
+#
 def getlist(n, i, l, ex=[0]):
   for j in range(i, n):
     if ex.count(j) > 0:

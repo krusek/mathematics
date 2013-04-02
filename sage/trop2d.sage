@@ -1,3 +1,23 @@
+# This will simply calculate the p-adic A-discriminant amoeba 
+# from the input A matrix as a list. 
+# When A\subset Z^n with |A|=n+3.
+#
+# If you want the 3-adic A-discriminant for the support
+#
+#     [ 6 0 0 0 3 1 ]
+# A = [ 0 3 1 6 0 0 ]
+#     [ 1 1 1 0 0 0 ]
+#
+# in the box [-4,25]x[-25,4], then you use the command:
+# A = [[6,0,0,0,0,3,1],[0,3,1,6,0,0],[1,1,1,0,0,0]]
+# show(amoeba(A, 3), xmin=-4, ymin=-25, xmax=25, ymax=4, aspect_ratio=1)
+#
+# The parameters for the function amoeba are as follows:
+# A     - The support of the family. Each element of A is a row of the support
+#         matrix.
+# prime - The prime to use for Qp.
+#
+
 def amoeba_from_B(B, p):
   Z = filter(lambda b: b[1][0] != 0, enumerate(B))
   Q = Qp(p)
