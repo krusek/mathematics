@@ -1,5 +1,22 @@
 # This will simply calculate the real A-discriminant amoeba 
 # from the input A matrix as a list.
+#
+# If you want the real A-discriminant for the support
+#
+#     [ 6 0 0 0 3 1 ]
+# A = [ 0 3 1 6 0 0 ]
+#     [ 1 1 1 0 0 0 ]
+#
+# in the box [-10,10]^2, then you use the command:
+# A = [[6,0,0,0,0,3,1],[0,3,1,6,0,0],[1,1,1,0,0,0]]
+# show(amoeba(A, 1/100), xmin=-10, ymin=-10, xmax=10, ymax=10)
+#
+# The parameters for A are as follows:
+# A -     The support of the family. Each element of A is a row of the support
+#         matrix.
+# angle - The smallest angle to differentiate. The smaller the more accurate the
+#         resulting graph.
+#
 
 var('n')
 
@@ -25,6 +42,17 @@ def get_asymptotes(B):
   BB.sort()
   return BB
 
+# This returns a collection of lines representing the A-discriminant amoeba
+# corresponding to B.
+# B     - The B matrix.
+# count - The number of pieces to break the domain into.
+#
+# This could be made more accurate if the cusps were found. This is not a
+# difficult task, but I have not included it for brevity. I have not found any
+# examples where it is noticeably different.
+#
+# All it does is break the domain into arcs between the asymptotes, then it
+# breaks the lines into count many pieces.
 def amoeba_from_B(B, count):
   ass = get_asymptotes(B)
   f = f_from_B(B)
@@ -42,6 +70,7 @@ def amoeba_from_B(B, count):
     lines.append(line(l))
   return sum(lines)
 
+# This gets the B matrix, which is the kernel of \hat{A}.
 def get_B_list(A):
   Ah = A + [[1]*len(A[0])]
   Am = matrix(Ah).transpose()
