@@ -34,10 +34,14 @@ def amoeba_from_B(B, p):
     zv = filter(lambda zz: zz != Infinity and zz != -Infinity, zv)
     zv = [-100, 100] + list(set(zv))
     zv.sort()
-
-    l = map(lambda i: FI(zv[i]), range(len(zv)))
-    l = line(l)
-    rval.append(l)
+    
+    l1 = line([FI(zv[0]), FI(zv[1])], color='green')
+    ll = line([FI(zv[-2]), FI(zv[-1])], color='green')
+    rval.append(l1)
+    rval.append(ll)
+    if len(zv) > 2:
+      l = line(map(lambda i: FI(zv[i]), range(1, len(zv)-1)))
+      rval.append(l)
   return rval
 
 def get_B_list(A, transpose=False):
