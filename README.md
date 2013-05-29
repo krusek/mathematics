@@ -16,7 +16,7 @@ This file creates the reduced A-discriminant contour for n-variate,
     a = amoeba(A, 100)
     show(a, xmin=-10, xmax=10, ymin=-10, ymax=10)
 
-For a multivariate polynomial, like `ax^6+by^3+cy+dty^6+etx^3+ftx` in `Q_p[x,y,t]` use
+For a multivariate family, like `ax^6+by^3+cy+dty^6+etx^3+ftx` in `Q_p[x,y,t]` use
 
     A = [[6,0,0,0,3,1],[0,3,1,6,0,0],[0,0,0,1,1,1]]
 
@@ -32,7 +32,7 @@ n-variate, (n+3)-nomials. Code to generate the amoeba for the cubic family,
     a = amoeba(A, 3)
     show(a, xmin=-4, xmax=25, ymin=-25, ymax=4)
 
-For a multivariate polynomial, like `ax^6+by^3+cy+dty^6+etx^3+ftx` in `Q_p[x,y,t]` use
+For a multivariate family, like `ax^6+by^3+cy+dty^6+etx^3+ftx` in `Q_p[x,y,t]` use
 
     A = [[6,0,0,0,3,1],[0,3,1,6,0,0],[0,0,0,1,1,1]]
 
