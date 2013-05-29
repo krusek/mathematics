@@ -79,6 +79,32 @@ def get_B_list(A):
   B = map(lambda b: list(b), list(Bm))
   return B
 
+# This returns the point that poly would be mapped to in the 
+# discriminant amoeba.
+#
+# if log is false then poly is expected to already be the logarithm
+# of the coordinates.
+def get_point(A, poly, log = False):
+  B = get_B_list(A)
+  if log:
+    pp = lambda q: math.log(abs(q))
+  else:
+    pp = lambda q: q
+  return map(lambda i: sum(map(lambda j: B[j][i]*pp(poly[j]), range(len(poly)))), [0,1])
+  
+# This gets a polynomial (coefficient vector) that maps to the point, point.
+#
+# if exp is False then it returns the logarithms of the coefficients.
+def get_polynomial(A, point, exp = False):
+  B = get_B_list(A)
+  BB = matrix(B)
+  BBB = BB.transpose()*BB
+  fm = matrix(point)*BBB.inverse()*BB.transpose()
+  pows = list(list(fm)[0])
+  if exp:
+    return map(lambda p: math.exp(p), pows)
+  return pows
+
 def amoeba(A, angle):
   B = get_B_list(A)
   return amoeba_from_B(B, ceil(2*math.pi/angle+1))

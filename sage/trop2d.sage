@@ -53,6 +53,81 @@ def get_B_list(A, transpose=False):
   B = map(lambda b: list(b), list(Bm))
   return B
 
+# This attempts to get a linear combination of elements of B that give 
+# the basis vector e1 or e0, depending on whether index = 0, 1
+def get_ei(B, index):
+  f = [0]*len(B)
+  ii = (index + 1) % 2
+  if index == 0:
+    det = lambda i, j: B[i][0]*B[j][1]-B[i][1]*B[j][0]
+  else:
+    det = lambda i, j: B[i][1]*B[j][0]-B[i][0]*B[j][1]
+  for i in range(len(B)):
+    if B[i][index] == 0: continue
+    for j in range(i+1, len(B)):
+      if B[j][index] == 0: continue
+      dj = det(i,j)
+      if dj == 0:
+        continue
+      if dj == -1:
+        i, j = j, i
+        dj = 1
+      fj = [0]*len(B)
+      fj[i] = B[j][ii]
+      fj[j] = -B[i][ii]
+      if dj == 1:
+        return ff
+      for k in range(j+1, len(B)):
+        if B[k][index] == 0: continue
+        dk = det(i, k)
+        if dk == 0:
+          continue
+        if dk == -1:
+          i, k = k, i
+          dk = 1
+        fk = [0]*len(B)
+        fk[i] = B[k][ii]
+        fk[k] = -B[i][ii]
+        if dj == 1:
+          return fk
+        g = xgcd(dj, dk)
+        if g[0] == 1:
+          return map(lambda i: fj[i]*g[1]+fk[i]*g[2], range(len(fj)))
+  return None  
+
+# This attempts to find a polynomial (coefficient bector) that will map to 
+# the point p in the discriminant amoeba.
+#
+# If p is None, then only the valuations are given.
+def get_polynomial(A, point, p = None):
+  B = get_B_list(A, True)
+  e0 = get_ei(B, 0)
+  e1 = get_ei(B, 1)
+  if e0 == None or e1 == None:
+    print "FAILED"
+    return None
+  p0 = map(lambda ee: ee*point[0], e0)
+  p1 = map(lambda ee: ee*point[1], e1)
+  ee = map(lambda i: p0[i]+p1[i], range(len(e0)))
+  if p == None:
+    return ee
+  else:
+    return map(lambda e: p^e, ee)
+
+# This returns the point that the input polynomial (coefficient vector) 
+# maps to.
+#
+# if p is None then poly is expected to be a list of powers. That is, the 
+# actual polynomial is expected to be [p^poly[i] for i in range(len(poly))]
+def get_point(A, poly, p = None):
+  B = get_B_list(A, True)
+  if p != None:
+    Q = Qp(p)
+    pp = lambda q: Q(q).valuation()
+  else:
+    pp = lambda q: q
+  return map(lambda i: sum(map(lambda j: B[j][i]*pp(poly[j]), range(len(poly)))), [0,1])
+
 def amoeba(A, p):
   B = get_B_list(A, True)
   return amoeba_from_B(B, p)
