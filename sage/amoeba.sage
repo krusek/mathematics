@@ -9,7 +9,7 @@
 #     [ 1 1 1 0 0 0 ]
 #
 # in the box [-10,10]^2, then you use the command:
-# A = [[6,0,0,0,0,3,1],[0,3,1,6,0,0],[1,1,1,0,0,0]]
+# A = [[6,0,0,0,3,1],[0,3,1,6,0,0],[1,1,1,0,0,0]]
 # show(amoeba(A, 1/100), xmin=-10, ymin=-10, xmax=10, ymax=10)
 #
 # The parameters for the function amoeba are as follows:

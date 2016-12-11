@@ -13,7 +13,7 @@ This file creates the reduced A-discriminant contour for n-variate,
 
     runfile "amoeba.sage"
     A = [[0,1,2,3]]
-    a = amoeba(A, 100)
+    a = amoeba(A, 1/100)
     show(a, xmin=-10, xmax=10, ymin=-10, ymax=10)
 
 For a multivariate family, like `ax^6+by^3+cy+dty^6+etx^3+ftx` in `Q_p[x,y,t]` use
